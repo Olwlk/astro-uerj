@@ -8,14 +8,14 @@ const Header = () => {
             <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                     {/* UERJ Logo */}
-                    <img src="/logo-uerj.png" alt="UERJ" className="h-12 w-auto mr-3" />
+                    <img src="/logo-uerj.png" alt="UERJ" className="h-12 w-auto mr-3 bg-white rounded-lg p-1" />
                     <Star className="w-6 h-6 text-purple-400 fill-current" />
                     <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                         Astro UERJ
                     </span>
                 </div>
                 <div className="text-xs text-slate-400 hidden md:block">
-                    Instalações em Ambiente de Computação
+                    Davi Nascimento De Lima
                 </div>
             </div>
         </header>
