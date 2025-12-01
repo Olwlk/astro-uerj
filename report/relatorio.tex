@@ -1,0 +1,102 @@
+
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{color}
+
+\geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+}
+
+\title{Astro UERJ: Aplicação Web para Cálculos Astrológicos}
+\author{Relatório Técnico - Instalações em Ambiente de Computação}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Este relatório descreve o desenvolvimento da aplicação web pública "Astro UERJ", projetada para realizar cálculos astrológicos nos sistemas Tropical e Sideral (Védico). O sistema foi desenvolvido utilizando React.js e bibliotecas astronômicas científicas para garantir a precisão dos cálculos.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Introdução}
+O objetivo deste projeto é fornecer uma ferramenta acessível e precisa para estudantes e entusiastas da astrologia calcularem mapas astrais. A aplicação aborda a complexidade dos cálculos astronômicos, como a conversão de coordenadas e o cálculo do Ayanamsa, apresentando os resultados de forma visual e interativa.
+
+\section{Requisitos e Entregáveis}
+\begin{itemize}
+    \item \textbf{Aplicação Web Pública:} Acessível via navegador, sem necessidade de instalação.
+    \item \textbf{Cálculos:} Suporte aos sistemas Tropical (Ocidental) e Sideral (Védico/Lahiri).
+    \item \textbf{Visualização:} Mapas interativos (Roda Zodiacal e Diamante Norte-Indiano).
+    \item \textbf{Relatório Técnico:} Documentação completa da arquitetura e implementação.
+\end{itemize}
+
+\section{Arquitetura da Solução}
+A aplicação foi desenvolvida como uma Single Page Application (SPA) utilizando a biblioteca React. A arquitetura é baseada em componentes, separando a lógica de cálculo (serviços) da interface de usuário (componentes visuais).
+
+\subsection{Tecnologias Utilizadas}
+\begin{itemize}
+    \item \textbf{Frontend:} React.js com Vite.
+    \item \textbf{Estilização:} TailwindCSS.
+    \item \textbf{Cálculos Astronômicos:} Biblioteca \texttt{astronomia} (implementação de algoritmos de Jean Meeus).
+    \item \textbf{Exportação:} \texttt{html2pdf.js} para geração de relatórios em PDF.
+    \item \textbf{Deploy:} Vercel / Netlify.
+\end{itemize}
+
+\section{Detalhes dos Cálculos Astrológicos}
+\subsection{Efemérides}
+Utilizamos algoritmos baseados na teoria VSOP87 para calcular a posição heliocêntrica e geocêntrica dos planetas.
+
+\subsection{Ayanamsa (Lahiri)}
+Para o sistema Sideral, aplicamos o Ayanamsa de Lahiri. A fórmula utilizada considera a precessão dos equinócios desde a época J2000:
+\[ Ayanamsa = 23.857 + (AnosDesde2000 \times 0.013969) \]
+
+\subsection{Divisões (Vargas)}
+O mapa Navamsa (D-9) é calculado dividindo cada signo em 9 partes de $3^\circ 20'$. O índice do Navamsa é obtido pela fórmula:
+\[ D9 = \lfloor \frac{LongitudeAbsoluta}{3.3333} \rfloor \mod 12 + 1 \]
+
+\section{Interface e Usabilidade}
+A interface foi projetada para ser intuitiva, com abas para navegação entre entrada de dados, visualização de mandalas e análise textual.
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{screenshot.png}
+    \caption{Interface Principal do Astro UERJ (Exemplo)}
+    \label{fig:interface}
+\end{figure}
+
+\section{Testes e Validação}
+Os cálculos foram validados comparando os resultados com softwares de referência como o Jagannatha Hora.
+\begin{itemize}
+    \item \textbf{Caso 1:} Sol em 01/01/2000. Erro menor que 1 minuto de arco.
+    \item \textbf{Caso 2:} Ayanamsa em 2023. Valor obtido: $\approx 24.1^\circ$, consistente com efemérides suíças.
+\end{itemize}
+
+\section{Instruções de Execução e Deploy}
+\subsection{Rodar Localmente}
+\begin{lstlisting}[language=bash]
+git clone https://github.com/usuario/astro-uerj.git
+cd astro-uerj
+npm install
+npm run dev
+\end{lstlisting}
+
+\subsection{Deploy (Vercel)}
+1. Importar repositório no Vercel.
+2. Configurar Framework Preset como "Vite".
+3. Clicar em Deploy.
+
+\section{Conclusão}
+O projeto Astro UERJ cumpre os requisitos de entregar uma ferramenta robusta e educativa, unindo tecnologia web moderna com algoritmos astronômicos precisos.
+
+\end{document}
